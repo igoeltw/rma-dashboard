@@ -4,8 +4,8 @@ import pandas as pd
 from datetime import datetime
 
 
-def load_and_clean_data(json_path: str = "data/flattened_RMA.json") -> pd.DataFrame:
-    """Load and clean RMA ticket data from flattened JSON."""
+def load_and_clean_data(json_path: str = "data/analyzed_RMA.json") -> pd.DataFrame:
+    """Load and clean RMA ticket data from analyzed JSON (with Timmy categories)."""
     import json
     with open(json_path, 'r') as f:
         data = json.load(f)
