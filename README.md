@@ -15,11 +15,16 @@ Then open **http://localhost:8501** in your browser.
 
 ## Data Source
 
-This dashboard visualizes data from the Jira RMA board. To refresh data:
+This dashboard comes pre-loaded with **658 analyzed RMA tickets** including:
+- Status, timestamps, node names
+- Timmy categories: Hardware Failure (551), GPU Firmware (91), Storage (6), etc.
+
+To refresh data:
 
 ```bash
 cd ../tensorwave-atlassian-automation
 tw-atlas pull --project RMA --output-dir data/rma
+tw-atlas analyze -i data/flattened_RMA.json -o data/analyzed_RMA.json --model timothy-ishika
 ```
 
 ## Tech Stack
