@@ -18,7 +18,7 @@ st.set_page_config(page_title="RMA Dashboard", page_icon="🔧", layout="wide")
 st.title("🔧 RMA Dashboard")
 st.markdown("Track GPU node RMA status and workflow metrics")
 
-JSON_PATH = "data/analyzed_RMA.json"
+JSON_PATH = "data/flattened_RMA.json"
 
 try:
     df = load_and_clean_data(JSON_PATH)
@@ -32,6 +32,22 @@ if df.empty:
     st.stop()
 
 st.sidebar.header("Filters")
+
+if "created" in df.columns:
+    df = df.sort_values("created")
+    min_date = df["created"].min().date()
+    max_date = df["created"].max().date()
+    
+    date_range = st.sidebar.date_input(
+        "Date Range",
+        value=(min_date, max_date),
+        min_value=min_date,
+        max_value=max_date
+    )
+    
+    if len(date_range) == 2:
+        start_date, end_date = date_range
+        df = df[(df["created"].dt.date >= start_date) & (df["created"].dt.date <= end_date)]
 
 if "status" in df.columns:
     statuses = ["All"] + sorted(df["status"].dropna().unique().tolist())
