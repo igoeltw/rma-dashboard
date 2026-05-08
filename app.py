@@ -18,7 +18,7 @@ st.set_page_config(page_title="RMA Dashboard", page_icon="🔧", layout="wide")
 st.title("🔧 RMA Dashboard")
 st.markdown("Track GPU node RMA status and workflow metrics")
 
-JSON_PATH = "data/flattened_RMA.json"
+JSON_PATH = "data/analyzed_RMA.json"
 
 try:
     df = load_and_clean_data(JSON_PATH)
